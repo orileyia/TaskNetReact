@@ -22,4 +22,34 @@ function App() {
   );
 }
 
+function Sidebar() {
+  return (
+    <aside className="sidebar">
+    <h2 className="text-lg font-semibold mb-4">Navigation</h2>
+    <nav>
+      <a href="index.html" className="nav-item">
+        <i data-lucide="home" />
+        Home
+      </a>
+      <a href="#" className="nav-item">
+        <i data-lucide="briefcase" />
+        My Jobs
+      </a>
+      <a href="#" className="nav-item">
+        <i data-lucide="users" />
+        Find Freelancers
+      </a>
+      <a href="#" className="nav-item">
+        <i data-lucide="message-square" />
+        Messages
+      </a>
+      <a href="#" className="nav-item">
+        <i data-lucide="settings" />
+        Settings
+      </a>
+    </nav>
+  </aside>
+  )
+}
+
 export default App;
