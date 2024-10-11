@@ -1,24 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import { Icon, Import } from 'lucide-react';
+import { BriefcaseBusiness, UserPlus, MessageSquare, Settings, House } from 'lucide-react';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Sidebar />
   );
 }
 
@@ -28,24 +16,24 @@ function Sidebar() {
     <h2 className="text-lg font-semibold mb-4">Navigation</h2>
     <nav>
       <a href="index.html" className="nav-item">
-        <i data-lucide="home" />
-        Home
+        <House />
+        <span>Home</span>
       </a>
       <a href="#" className="nav-item">
-        <i data-lucide="briefcase" />
-        My Jobs
+        <BriefcaseBusiness />
+        <span>My Jobs</span>
       </a>
       <a href="#" className="nav-item">
-        <i data-lucide="users" />
-        Find Freelancers
+        <UserPlus />
+        <span>Find Freelancers</span>
       </a>
       <a href="#" className="nav-item">
-        <i data-lucide="message-square" />
-        Messages
+        <MessageSquare />
+        <span>Messages</span>
       </a>
       <a href="#" className="nav-item">
-        <i data-lucide="settings" />
-        Settings
+        <Settings />
+        <span>Settings</span>
       </a>
     </nav>
   </aside>
