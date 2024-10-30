@@ -10,7 +10,6 @@ const PostJobPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle job posting logic here
     console.log('Job posting attempt with:', { title, description, category, budget, deadline });
   };
 
