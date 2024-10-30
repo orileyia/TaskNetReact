@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Search, Menu } from 'lucide-react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import './css/App.css';
-import TaskNetHomepage from './TaskNetHomepage';
-import LoginPage from './components/LoginPage';
-import SignupPage from './components/SignupPage';
-import PostJobPage from './components/PostJobPage';
-import HowItWorksPage from './components/HowItWorksPage';
+import LoginPage from './components/LoginPage.tsx';
+import SignupPage from './components/SignupPage.tsx';
+import PostJobPage from './components/PostJobPage.tsx';
+import HowItWorksPage from './components/HowItWorksPage.tsx';
 
 const categories = ["Web Development", "Graphic Design", "Content Writing", "Digital Marketing", "Video Editing"];
 
@@ -38,25 +37,41 @@ const TaskNetHomepage: React.FC = () => {
   return (
     <div>
       <header>
+        <Router>
         <div className="container">
-          <div className="logo">TaskNet</div>
-          <Router>
-            <Switch>
-              <Route exact path="/" component={TaskNetHomepage} />
-              <Route path="/login" component={LoginPage} />
-              <Route path="/signup" component={SignupPage} />
-              <Route path="/post-job" component={PostJobPage} />
-              <Route path="/how-it-works" component={HowItWorksPage} />
-            </Switch>
-          </Router>
+        <header>
+          <div className="logo">
+            <Link to="/">TaskNet</Link>
+          </div>
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/post-job">Post a Job</Link>
+            <Link to="/how-it-works">How It Works</Link>
+          </nav>
           <div className="auth-buttons">
-            <button>Log In</button>
-            <button className="signup-button">Sign Up</button>
+            <Link to="/login">
+              <button>Log In</button>
+            </Link>
+            <Link to="/signup">
+              <button className="signup-button">Sign Up</button>
+            </Link>
           </div>
           <button className="menu-button">
             <Menu size={24} />
           </button>
-        </div>
+        </header>
+
+        <main>
+          <Routes>
+            <Route path="/" element={<TaskNetHomepage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/post-job" element={<PostJobPage />} />
+            <Route path="/how-it-works" element={<HowItWorksPage />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
       </header>
 
       <main className="container">
