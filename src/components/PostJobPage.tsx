@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createJob } from '../api';
 import '../css/PostJobPage.css';
 
 const PostJobPage: React.FC = () => {
@@ -7,16 +9,30 @@ const PostJobPage: React.FC = () => {
   const [category, setCategory] = useState('');
   const [budget, setBudget] = useState('');
   const [deadline, setDeadline] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Job posting attempt with:', { title, description, category, budget, deadline });
+    setError('');
+    setIsLoading(true);
+
+    try {
+      await createJob({ title, description, category, budget: Number(budget), deadline });
+      navigate('/'); // Redirect to home page after successful job posting
+    } catch (err) {
+      setError('Error posting job. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="post-job-page">
       <div className="post-job-container">
         <h1>Post a New Job</h1>
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="title">Job Title</label>
@@ -73,7 +89,9 @@ const PostJobPage: React.FC = () => {
               required
             />
           </div>
-          <button type="submit" className="post-job-button">Post Job</button>
+          <button type="submit" className="post-job-button" disabled={isLoading}>
+            {isLoading ? 'Posting...' : 'Post Job'}
+          </button>
         </form>
       </div>
     </div>

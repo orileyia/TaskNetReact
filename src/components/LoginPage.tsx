@@ -1,20 +1,36 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../api';
 import '../css/LoginPage.css';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login attempt with:', { email, password });
+    setError('');
+    setIsLoading(true);
+
+    try {
+      const response = await login(email, password);
+      localStorage.setItem('token', response.data.token);
+      navigate('/'); // Redirect to home page after successful login
+    } catch (err) {
+      setError('Invalid email or password');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="login-page">
       <div className="login-container">
         <h1>Login to TaskNet</h1>
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -36,7 +52,9 @@ const LoginPage: React.FC = () => {
               required
             />
           </div>
-          <button type="submit" className="login-button">Log In</button>
+          <button type="submit" className="login-button" disabled={isLoading}>
+            {isLoading ? 'Logging in...' : 'Log In'}
+          </button>
         </form>
         <p className="signup-link">
           Don't have an account? <a href="/signup">Sign up</a>

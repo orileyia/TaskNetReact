@@ -10,7 +10,7 @@ import './css/App.css';
 const categories = ["Web Development", "Graphic Design", "Content Writing", "Digital Marketing", "Video Editing"]
 
 const initialTasks = [
-  { id: 1, title: "WordPress Website Development", category: "Web Development", price: 500, deadline: "5 days" },
+  { id: 1, title: "WordPress Website  Development", category: "Web Development", price: 500, deadline: "5 days" },
   { id: 2, title: "Logo Design for Tech Startup", category: "Graphic Design", price: 200, deadline: "3 days" },
   { id: 3, title: "SEO Content Writing", category: "Content Writing", price: 100, deadline: "2 days" },
   { id: 4, title: "Social Media Marketing Campaign", category: "Digital Marketing", price: 300, deadline: "7 days" },
