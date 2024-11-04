@@ -1,38 +1,52 @@
-import React, { useState } from 'react'
-import { Search, Menu } from 'lucide-react'
-import { Link, Routes, Route } from 'react-router-dom'
-import LoginPage from './components/LoginPage.tsx'
-import SignupPage from './components/SignupPage.tsx'
-import PostJobPage from './components/PostJobPage.tsx'
-import HowItWorksPage from './components/HowItWorksPage.tsx'
+import React, { useState, useEffect } from 'react';
+import { Search, Menu } from 'lucide-react';
+import { Link, Routes, Route } from 'react-router-dom';
+import LoginPage from './components/LoginPage.tsx';
+import SignupPage from './components/SignupPage.tsx';
+import PostJobPage from './components/PostJobPage.tsx';
+import HowItWorksPage from './components/HowItWorksPage.tsx';
 import './css/App.css';
 
-const categories = ["Web Development", "Graphic Design", "Content Writing", "Digital Marketing", "Video Editing"]
+// Define the structure of a Task
+interface Task {
+  _id: string;
+  title: string;
+  category: string;
+  budget: number;
+  deadline: string;
+}
 
-const initialTasks = [
-  { id: 1, title: "WordPress Website  Development", category: "Web Development", price: 500, deadline: "5 days" },
-  { id: 2, title: "Logo Design for Tech Startup", category: "Graphic Design", price: 200, deadline: "3 days" },
-  { id: 3, title: "SEO Content Writing", category: "Content Writing", price: 100, deadline: "2 days" },
-  { id: 4, title: "Social Media Marketing Campaign", category: "Digital Marketing", price: 300, deadline: "7 days" },
-  { id: 5, title: "Mobile App UI/UX Design", category: "Graphic Design", price: 800, deadline: "10 days" },
-  { id: 6, title: "Video Editing for YouTube Channel", category: "Video Editing", price: 150, deadline: "4 days" },
-]
+const categories = ["Web Development", "Graphic Design", "Content Writing", "Digital Marketing", "Video Editing"];
 
 export default function TaskNetHomepage() {
-  const [tasks] = useState(initialTasks)
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const [tasks, setTasks] = useState<Task[]>([]); // Specify tasks as an array of Task objects
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+  // Fetch tasks from the backend on component mount
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/jobs');
+        const data = await response.json();
+        setTasks(data); // Set tasks fetched from the backend
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
+      }
+    };
+    fetchTasks();
+  }, []);
 
   const handleCategoryChange = (category: string) => {
-    setSelectedCategories(prev =>
+    setSelectedCategories((prev) =>
       prev.includes(category)
-        ? prev.filter(c => c !== category)
+        ? prev.filter((c) => c !== category)
         : [...prev, category]
-    )
-  }
+    );
+  };
 
   const filteredTasks = selectedCategories.length > 0
-    ? tasks.filter(task => selectedCategories.includes(task.category))
-    : tasks
+    ? tasks.filter((task) => selectedCategories.includes(task.category))
+    : tasks;
 
   const HomePage = () => (
     <main className="container">
@@ -50,7 +64,7 @@ export default function TaskNetHomepage() {
           </button>
         </div>
         <div className="categories">
-          {categories.map(category => (
+          {categories.map((category) => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
@@ -65,17 +79,17 @@ export default function TaskNetHomepage() {
       <h3>Featured Tasks</h3>
       <div className="tasks-grid">
         {filteredTasks.map((task) => (
-          <div key={task.id} className="task-card">
+          <div key={task._id} className="task-card">
             <div className="task-content">
               <h4 className="task-title">{task.title}</h4>
               <span className="task-category">{task.category}</span>
-              <p className="task-details">Budget: ${task.price}</p>
-              <p className="task-details">Deadline: {task.deadline}</p>
+              <p className="task-details">Budget: ${task.budget}</p>
+              <p className="task-details">Deadline: {new Date(task.deadline).toLocaleDateString()}</p>
             </div>
             <div className="task-footer">
               <div className="client-info">
                 <img
-                  src={`https://i.pravatar.cc/40?img=${task.id}`}
+                  src={`https://i.pravatar.cc/40?img=${task._id}`}
                   alt="Client avatar"
                   className="client-avatar"
                 />
@@ -87,7 +101,7 @@ export default function TaskNetHomepage() {
         ))}
       </div>
     </main>
-  )
+  );
 
   return (
     <div className="container">
@@ -121,5 +135,5 @@ export default function TaskNetHomepage() {
         <Route path="/how-it-works" element={<HowItWorksPage />} />
       </Routes>
     </div>
-  )
+  );
 }
