@@ -1,4 +1,6 @@
+// api.js
 import axios from 'axios';
+import { getRequest, postRequest, putRequest, deleteRequest } from './requestUtils';
 
 const API_URL = 'http://localhost:5000/api';
 
@@ -25,14 +27,18 @@ api.interceptors.request.use(
 );
 
 // Authentication
-export const login = (email, password) => api.post('/login', { email, password });
-export const signup = (name, email, password) => api.post('/signup', { name, email, password });
+export const login = (email, password) => postRequest(api, '/login', { email, password });
+export const signup = (name, email, password) => postRequest(api, '/signup', { name, email, password });
+
+// Profile
+export const getProfile = () => getRequest(api, '/profile');
+export const updateProfile = (profileData) => putRequest(api, '/profile', profileData);
 
 // Jobs
-export const getAllJobs = () => api.get('/jobs');
-export const getJob = (id) => api.get(`/jobs/${id}`);
-export const createJob = (jobData) => api.post('/jobs', jobData);
-export const updateJob = (id, jobData) => api.put(`/jobs/${id}`, jobData);
-export const deleteJob = (id) => api.delete(`/jobs/${id}`);
+export const getAllJobs = () => getRequest(api, '/jobs');
+export const getJob = (id) => getRequest(api, `/jobs/${id}`);
+export const createJob = (jobData) => postRequest(api, '/jobs', jobData);
+export const updateJob = (id, jobData) => putRequest(api, `/jobs/${id}`, jobData);
+export const deleteJob = (id) => deleteRequest(api, `/jobs/${id}`);
 
 export default api;
