@@ -27,22 +27,24 @@ const Profile = () => {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = (e) => setProfileImage(e.target.result);
+            reader.onload = (e) => {
+                if (e.target.result) {
+                    setProfileImage(e.target.result);
+                }
+            };
             reader.readAsDataURL(file);
         }
     };
 
     const handleUpdateData = () => {
-        // Validate and update logic
+        // Validate and update logic here
         setMessage('Profile updated successfully!');
     };
 
     const togglePasswordVisibility = (inputId) => {
         const input = document.getElementById(inputId);
-        if (input.type === 'password') {
-            input.type = 'text';
-        } else {
-            input.type = 'password';
+        if (input) {
+            input.type = input.type === 'password' ? 'text' : 'password';
         }
     };
 
@@ -109,9 +111,9 @@ const Profile = () => {
                     <a href="#" className="nav-item">Settings</a>
                 </nav>
             </aside>
+            ```javascript
             <div className="flex-1">
-                <div className ```javascript
-="header">
+                <div className="header">
                     <h1 className="text-2xl font-bold text-primary">My Profile</h1>
                     <div className="button-group">
                         <a href="login.html"><button className="btn btn-ghost">Log In</button></a>
@@ -201,9 +203,8 @@ const Profile = () => {
                                             <div>
                                                 <h4 className="fs-18 fw-bold">About</h4>
                                                 <p className="text-muted mt-4">{introduction}</p>
-                                                <p className="text-muted">
+                                                <p className="text-muted ">
                                                     It describes the candidate's relevant experience, skills, and achievements.
- ```javascript
                                                 </p>
                                             </div>
                                             <div className="candidate-education-details mt-4">
@@ -276,8 +277,8 @@ const Profile = () => {
                                                             <img src={profileImage} className="profile-img" alt="Profile" />
                                                         </div>
                                                         <div className="profile-photo-edit">
-                                                            <input id="profile-img-file-input" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
-                                                            <label htmlFor="profile -img-file-input" className="profile-photo-edit-label" style={{ cursor: 'pointer' }}>
+                                                            <input id="profile-img-file-input" type="file" accept="image/*" onChange={handleImageChange} style={{ display : 'none' }} />
+                                                            <label htmlFor="profile-img-file-input" className="profile-photo-edit-label" style={{ cursor: 'pointer' }}>
                                                                 Избери изображение
                                                             </label>
                                                         </div>
@@ -309,7 +310,7 @@ const Profile = () => {
                                                     </div>
                                                     <h5 className="fs-17 fw-semibold mb-3">Profile</h5>
                                                     <h5 className="">Introduce Yourself</h5>
-                                                    <textarea className="form-control" rows="5 value={introduction}" onChange={(e) => setIntroduction(e.target.value)}></textarea>
+                                                    <textarea className="form-control" rows="5" value={introduction} onChange={(e) => setIntroduction(e.target.value)}></textarea>
                                                     <div className="row mb-3">
                                                         <div className="col-lg-6">
                                                             <label htmlFor="languages" className="form-label">Languages</label>
@@ -331,7 +332,7 @@ const Profile = () => {
                                                             <h5 className="fs-17 fw-semibold mb-3">Change Password</h5>
                                                             <div id="passwordChangeForm">
                                                                 <div className="row mb-3">
-                                                                    <div className="col-lg-111">
+                                                                    <div className="col-lg-12">
                                                                         <label htmlFor="currentPassword" className="form-label">Current password</label>
                                                                         <div className="input-group">
                                                                             <input type="password" className="form-control-long" name="currentPassword" value={currentPassword} onChange={handlePasswordChange} />
@@ -352,9 +353,8 @@ const Profile = () => {
                                                                         </div>
                                                                     </div>
                                                                     <div className="col-lg-6">
-                                                                        <label htmlFor="confirmPassword" className="form-label">Confirm password</label>
-                                                                        <div className ```javascript
-="input-group">
+                                                                        <label htmlFor="confirmPassword" className ="form-label">Confirm password</label>
+                                                                        <div className="input-group">
                                                                             <input type="password" className="form-control" name="confirmPassword" value={confirmPassword} onChange={handlePasswordChange} />
                                                                             <button className="btn btn-primary" type="button" onClick={() => togglePasswordVisibility('confirmPassword')}>
                                                                                 <i className="fas fa-eye"></i>
