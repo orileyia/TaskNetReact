@@ -20,7 +20,7 @@ const Profile = () => {
     const [location, setLocation] = useState('Varna');
     const [introduction, setIntroduction] = useState('Developer with over 5 years\' experience working in both the public and private sectors...');
     const [languages, setLanguages] = useState(['English', 'German', 'French']);
-    
+    const [tempProfileImage, setTempProfileImage] = useState(null);
     // Temporary state variables for updates
     const [tempFirstName, setTempFirstName] = useState(firstName);
     const [tempLastName, setTempLastName] = useState(lastName);
@@ -58,7 +58,7 @@ const Profile = () => {
         reader.onload = (e) => {
             const target = e.target;
             if (target && typeof target.result === 'string') {
-                setProfileImage(target.result); // Актуализиране на изображението в реално време
+                setProfileImage(target.result); // Актуализираме изображението в реално време
                 localStorage.setItem('tempProfileImage', target.result); // Запазваме изображението в локалното хранилище
             }
         };
@@ -86,10 +86,10 @@ const Profile = () => {
         setTempLanguages(tempLanguages);
     
         const newImageSrc = localStorage.getItem('tempProfileImage');
-        if (newImageSrc) {
-            setProfileImage(newImageSrc); // Актуализираме профилната снимка
-            localStorage.removeItem('tempProfileImage'); // Премахваме временното изображение след актуализация
-        }
+    if (newImageSrc) {
+        setProfileImage(newImageSrc); // Актуализираме профилната снимка за окончателно запазване
+        localStorage.removeItem('tempProfileImage'); // Премахваме временното изображение след актуализация
+    }
 
         alert('Profile updated successfully!');
     };
