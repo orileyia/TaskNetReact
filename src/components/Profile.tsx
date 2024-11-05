@@ -312,22 +312,22 @@ profile-fw-bold mt-4">Skills</h4>
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div className="row mb-3">
-                                                        <div className="col-lg-6">
+                                                    <div className="profile-row mb-3">
+                                                        <div className="profile-col-lg-6">
                                                             <label htmlFor="firstName" className="profile-form-label">First Name</label>
                                                             <input type="text" className="profile-form-control" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                                                         </div>
-                                                        <div className="col-lg-6">
+                                                        <div className="profile-col-lg-6">
                                                             <label htmlFor="lastName" className="profile-form-label">Last Name</label>
                                                             <input type="text" className="profile-form-control" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                                                         </div>
                                                     </div>
-                                                    <div className="row mb-3">
-                                                        <div className="col-lg-6">
+                                                    <div className="profile-row mb-3">
+                                                        <div className="profile-col-lg-6">
                                                             <label htmlFor="email" className="profile-form-label">Email</label>
                                                             <input type="text" className="profile-form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                                                         </div>
-                                                        <div className="col-lg-6">
+                                                        <div className="profile-col-lg-6">
                                                             <label htmlFor="accountType" className="profile-form-label">Account Type</label>
                                                             <select className="profile-form-select" id="accountType">
                                                                 <option value="4">Accounting</option>
@@ -340,12 +340,12 @@ profile-fw-bold mt-4">Skills</h4>
                                                     <h5 className="profile-fs-17 profile-fw-semibold mb-3">Profile</h5>
                                                     <h5 className="">Introduce Yourself</h5>
                                                     <textarea className="profile-form-control" id="introduction" rows={5} style={{ maxWidth: '100%' }} value={introduction} onChange={(e) => setIntroduction(e.target.value)}></textarea>
-                                                    <div className="row mb-3">
-                                                        <div className="col-lg-6">
+                                                    <div className="profile-row mb-3">
+                                                        <div className="profile-col-lg-6">
                                                             <label htmlFor="languages" className="profile-form-label">Languages</label>
                                                             <input type="text" className="profile-form-control" id="languages" value={languages.join (', ')} onChange={(e) => setLanguages(e.target.value.split(',').map(lang => lang.trim()))} />
                                                         </div>
-                                                        <div className="col-lg-6">
+                                                        <div className="profile-col-lg-6">
                                                             <label htmlFor="location" className="profile-form-label">Location</label>
                                                             <select className="profile-form-select" id="location" value={location} onChange={(e) => setLocation(e.target.value)}>
                                                                 <option value="SOF">Sofia</option>
@@ -360,8 +360,8 @@ profile-fw-bold mt-4">Skills</h4>
                                                         <div className="profile-card-body">
                                                             <h5 className="profile-fs-17 profile-fw-semibold mb-3">Change Password</h5>
                                                             <div id="passwordChangeForm">
-                                                                <div className="row mb-3">
-                                                                    <div className="col-lg-111">
+                                                                <div className="profile-row mb-3">
+                                                                    <div className="profile-col-lg-111">
                                                                         <label htmlFor="currentPassword" className="profile-form-label">Current password</label>
                                                                         <div className="profile-input-group">
                                                                             <input type="password" className="profile-form-control-long" id="currentPassword" />
@@ -371,8 +371,8 @@ profile-fw-bold mt-4">Skills</h4>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div className="row mb-3">
-                                                                    <div className="col-lg-6">
+                                                                <div className="profile-row mb-3">
+                                                                    <div className="profile-col-lg-6">
                                                                         <label htmlFor="newPassword" className="profile-form-label">New password</label>
                                                                         <div className="profile-input-group">
                                                                             <input type="password" className="profile-form-control" id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
@@ -382,7 +382,7 @@ profile-fw-bold mt-4">Skills</h4>
                                                                         </div>
                                                                         <div id="passwordStrength" className="mt-2"></div>
                                                                     </div>
-                                                                    <div className="col-lg-6">
+                                                                    <div className="profile-col-lg-6">
                                                                         <label htmlFor="confirmPassword" className="profile-form-label">Confirm password</label>
                                                                         <div className="profile-input-group">
                                                                             <input type="password" className="profile-form-control" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
