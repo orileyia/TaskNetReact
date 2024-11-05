@@ -5,6 +5,7 @@ import LoginPage from './components/LoginPage.tsx';
 import SignupPage from './components/SignupPage.tsx';
 import PostJobPage from './components/PostJobPage.tsx';
 import HowItWorksPage from './components/HowItWorksPage.tsx';
+import Profile from './components/Profile.tsx';
 import './css/App.css';
 
 // Define the structure of a Task
@@ -113,6 +114,7 @@ export default function TaskNetHomepage() {
           <Link to="/">Home</Link>
           <Link to="/post-job">Post a Job</Link>
           <Link to="/how-it-works">How It Works</Link>
+          <Link to="/profile">Profile</Link>
         </nav>
         <div className="auth-buttons">
           <Link to="/login">
@@ -133,6 +135,7 @@ export default function TaskNetHomepage() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/post-job" element={<PostJobPage />} />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );
