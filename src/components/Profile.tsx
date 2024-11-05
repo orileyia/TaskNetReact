@@ -7,6 +7,7 @@ import whatsappIcon from '../images/whatsapp.jpeg';
 import callIcon from '../images/call.png';
 import defaultProfileImage from '../images/profile.jpg';
 
+import { Link } from 'react-router-dom';
 import BookmarksJobs from './BookmarksJobs';
 
 const Profile = () => {
@@ -183,6 +184,9 @@ const Profile = () => {
                 <div className="profile-header">
                     <h1 className="profile-text-2xl profile-font-bold profile-text-primary">My Profile</h1>
                     <div className="profile-button-group">
+                    <Link to="/bookmarks-jobs">
+                        <button className="profile-btn profile-btn-primary">View Bookmarked Jobs</button>
+                    </Link>
                         <a href="login.html"><button className="profile-btn profile-btn-ghost">Log In</button></a>
                         <a href="signup.html"><button className="profile-btn profile-btn-primary">Sign Up</button></a>
                     </div>
