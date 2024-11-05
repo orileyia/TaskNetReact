@@ -5,12 +5,14 @@ import facebookIcon from '../images/facebook.png';
 import twitterIcon from '../images/twitter.jpg';
 import whatsappIcon from '../images/whatsapp.jpeg';
 import callIcon from '../images/call.png';
+import defaultProfileImage from '../images/profile.jpg';
+
 
 
 
 const Profile = () => {
     const [activeTab, setActiveTab] = useState('overview');
-    const [profileImage, setProfileImage] = useState('../images/profile.jpg');
+    const [profileImage, setProfileImage] = useState(defaultProfileImage);
     const [firstName, setFirstName] = useState('Iva');
     const [lastName, setLastName] = useState('Traykova');
     const [email, setEmail] = useState('user@gmail.com');
