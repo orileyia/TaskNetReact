@@ -1,6 +1,6 @@
 // api.js
 import axios from 'axios';
-import { getRequest, postRequest, putRequest, deleteRequest } from './requestUtils';
+import { getRequest, postRequest, putRequest, deleteRequest, postRequestWithoutToken } from './requestUtils';
 
 const API_URL = 'http://localhost:5000/api';
 
@@ -27,8 +27,29 @@ api.interceptors.request.use(
 );
 
 // Authentication
-export const login = (email, password) => postRequest(api, '/login', { email, password });
-export const signup = (name, email, password) => postRequest(api, '/signup', { name, email, password });
+export const login = async (email, password) => {
+  try {
+    const response = await postRequest(api, '/login', { email, password });
+    localStorage.setItem('token', response.token); // Save token on successful login
+    return response;
+  } catch (error) {
+    console.error("Login error:", error.response ? error.response.data : error.message);
+    throw error; // Rethrow the error to handle it in your component
+  }
+};
+
+export const signup = async (name, email, password) => {
+  try {
+    const response = await postRequestWithoutToken(api, '/signup', { name, email, password });
+    console.log('Signup successful:', response);
+    localStorage.setItem('token', response.token);
+    return response;
+  } catch (error) {
+    console.error('Signup error:', error.response ? error.response.data : error.message);
+    throw error;
+  }
+};
+
 
 // Profile
 export const getProfile = () => getRequest(api, '/profile');

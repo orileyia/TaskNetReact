@@ -26,9 +26,9 @@ const SignupPage: React.FC = () => {
     try {
       const response = await signup(name, email, password);
       localStorage.setItem('token', response.data.token);
-      navigate('/'); // Redirect to home page after successful signup
+      navigate('/'); 
     } catch (err) {
-      setError('Error signing up. Please try again.');
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }
