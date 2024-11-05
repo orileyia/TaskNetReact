@@ -7,6 +7,8 @@ import whatsappIcon from '../images/whatsapp.jpeg';
 import callIcon from '../images/call.png';
 import defaultProfileImage from '../images/profile.jpg';
 
+import BookmarksJobs from './BookmarksJobs';
+
 const Profile = () => {
     useEffect(() => {
         showOverview();
