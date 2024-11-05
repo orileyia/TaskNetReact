@@ -3,7 +3,7 @@ import '../css/Profile.css';
 
 const Profile = () => {
     const [activeTab, setActiveTab] = useState('overview');
-    const [profileImage, setProfileImage] = useState('assets/images/profile.jpg');
+    const [profileImage, setProfileImage] = useState('../images/profile.jpg');
     const [firstName, setFirstName] = useState('Iva');
     const [lastName, setLastName] = useState('Traykova');
     const [email, setEmail] = useState('user@gmail.com');
@@ -140,22 +140,22 @@ const Profile = () => {
                                 <ul className="candidate-detail-social-menu list-inline mb-0">
                                     <li className="list-inline-item">
                                         <a href="javascript:void(0)" className="social-link">
-                                            <img src="./assets/images/facebook.png" alt="Facebook" className="social-icon" />
+                                            <img src="../images/facebook.png" alt="Facebook" className="social-icon" />
                                         </a>
                                     </li>
                                     <li className="list-inline-item">
                                         <a href="javascript:void(0)" className="social-link">
-                                            <img src="./assets/images/twitter.jpg" alt="Twitter" className="social-icon" />
+                                            <img src="../images/twitter.jpg" alt="Twitter" className="social-icon" />
                                         </a>
                                     </li>
                                     <li className="list-inline-item">
                                         <a href="javascript:void(0)" className="social-link">
-                                            <img src="./assets/images/whatsapp.jpeg" alt="WhatsApp" className="social-icon" />
+                                            <img src="../images/whatsapp.jpeg" alt="WhatsApp" className="social-icon" />
                                         </a>
                                     </li>
                                     <li className="list-inline-item">
                                         <a href="javascript:void(0)" className="social-link">
-                                            <img src="./assets/images/call.png" alt="Call" className="social-icon" />
+                                            <img src="../images/call.png" alt="Call" className="social-icon" />
                                         </a>
                                     </li>
                                 </ul>
