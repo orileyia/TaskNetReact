@@ -58,8 +58,8 @@ const Profile = () => {
         reader.onload = (e) => {
             const target = e.target;
             if (target && typeof target.result === 'string') {
-                setProfileImage(target.result);
-                localStorage.setItem('tempProfileImage', target.result);
+                setProfileImage(target.result); // Актуализиране на изображението в реално време
+                localStorage.setItem('tempProfileImage', target.result); // Запазваме изображението в локалното хранилище
             }
         };
         
@@ -85,6 +85,12 @@ const Profile = () => {
         setTempIntroduction(tempIntroduction);
         setTempLanguages(tempLanguages);
     
+        const newImageSrc = localStorage.getItem('tempProfileImage');
+        if (newImageSrc) {
+            setProfileImage(newImageSrc); // Актуализираме профилната снимка
+            localStorage.removeItem('tempProfileImage'); // Премахваме временното изображение след актуализация
+        }
+
         alert('Profile updated successfully!');
     };
 
