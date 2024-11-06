@@ -21,9 +21,7 @@ const LoginPage: React.FC = () => {
       navigate('/'); // Redirect to home page after successful login
     } catch (err) {
       setError('Invalid email or password');
-    } finally {
-      setIsLoading(false);
-    }
+    } 
   };
 
   return (

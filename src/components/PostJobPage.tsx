@@ -20,9 +20,15 @@ const PostJobPage: React.FC = () => {
 
     try {
       await createJob({ title, description, category, budget: Number(budget), deadline });
-      navigate('/'); // Redirect to home page after successful job posting
-    } catch (err) {
-      setError('Error posting job. Please try again.');
+      navigate('/'); 
+    } catch (err: any) {
+      if (err.response && err.response.status === 401) {
+        setError('Your session has expired. Please log in again.');
+        navigate('/login');
+      } else {
+        setError(err.response?.data?.message || 'Error posting job. Please try again.');
+      }
+      console.error('Job posting error:', err);
     } finally {
       setIsLoading(false);
     }

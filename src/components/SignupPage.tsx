@@ -25,10 +25,10 @@ const SignupPage: React.FC = () => {
 
     try {
       const response = await signup(name, email, password);
-      localStorage.setItem('token', response.data.token);
-      navigate('/'); 
-    } catch (err) {
-      setError(err.message);
+      localStorage.setItem('token', response.token);
+      navigate('/');
+    } catch (err: any) {
+      setError(err.response?.data?.message || err.message || 'An error occurred during signup');
     } finally {
       setIsLoading(false);
     }
