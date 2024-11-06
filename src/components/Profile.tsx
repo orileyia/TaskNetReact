@@ -19,6 +19,10 @@ const Profile = () => {
     const [email, setEmail] = useState('user@gmail.com');
     const [phone, setPhone] = useState('0000000000');
     const [location, setLocation] = useState('Varna');
+    const [facebook, setFacebook] = useState('https://www.facebook.com');
+    const [twitter, setTwitter] = useState('https://www.twitter.com');
+    const [whatsapp, setWhatsApp] = useState('https://www.whatsapp.com');
+    const [call, setCall] = useState('https://www.call.com');
     const [introduction, setIntroduction] = useState('Developer with over 5 years\' experience working in both the public and private sectors...');
     const [languages, setLanguages] = useState(['English', 'German', 'French']);
     const [skills, setSkills] = useState(['Cloud Management', 'Responsive Design', 'Network Architecture', 'PHP', 'Bootstrap', 'UI & UX Designer']);
@@ -31,6 +35,11 @@ const Profile = () => {
     const [tempIntroduction, setTempIntroduction] = useState(introduction);
     const [tempLanguages, setTempLanguages] = useState(languages.join(', '));
     const [tempSkills, setTempSkills] = useState(skills.join(', '));
+
+    const [tempFacebook, setTempFacebook] = useState(facebook);
+    const [tempTwitter, setTempTwitter] = useState(twitter);
+    const [tempWhatsApp, setTempWhatsApp] = useState(whatsapp);
+    const [tempCall, setTempCall] = useState(call);
 
 
     const [newPassword, setNewPassword] = useState('');
@@ -79,6 +88,10 @@ const Profile = () => {
         setEmail(tempEmail);
         setPhone(tempPhone);
         setLocation(tempLocation);
+        setFacebook(tempFacebook);
+        setTwitter(tempTwitter);
+        setWhatsApp(tempWhatsApp);
+        setCall(tempCall);
         setIntroduction(tempIntroduction);
         setLanguages(tempLanguages.split(',').map(lang => lang.trim()));
         setSkills(tempSkills.split(',').map(skill => skill.trim()));
@@ -89,6 +102,10 @@ const Profile = () => {
         setTempEmail(tempEmail);
         setTempPhone(tempPhone);
         setTempLocation(tempLocation);
+        setTempFacebook(tempFacebook);
+        setTempTwitter(tempTwitter);
+        setTempWhatsApp(tempWhatsApp);
+        setTempCall(tempCall);
         setTempIntroduction(tempIntroduction);
         setTempLanguages(tempLanguages);
         setTempSkills(tempSkills);
@@ -205,22 +222,22 @@ const Profile = () => {
                             <div className="profile-social-links">
                                 <ul className="profile-candidate-detail-social-menu list-inline mb-0">
                                     <li className="list-inline-item">
-                                        <a href="javascript:void(0)" className="profile-social-link">
+                                        <a href={facebook} className="profile-social-link" target="_blank" rel="noopener noreferrer">
                                             <img src={facebookIcon} alt="Facebook" className="profile-social-icon" />
                                         </a>
                                     </li>
                                     <li className="list-inline-item">
-                                        <a href="javascript:void(0)" className="profile-social-link">
+                                        <a href={twitter} className="profile-social-link" target="_blank" rel="noopener noreferrer">
                                             <img src={twitterIcon} alt="Twitter" className="profile-social-icon" />
                                         </a>
                                     </li>
                                     <li className="list-inline-item">
-                                        <a href="javascript:void(0)" className="profile-social-link">
+                                        <a href={whatsapp} className="profile-social-link" target="_blank" rel="noopener noreferrer">
                                             <img src={whatsappIcon} alt="WhatsApp" className="profile-social-icon" />
                                         </a>
                                     </li>
                                     <li className="list-inline-item">
-                                        <a href="javascript:void(0)" className="profile-social-link">
+                                        <a href={call} className="profile-social-link" target="_blank" rel="noopener noreferrer">
                                             <img src={callIcon} alt="Call" className="profile-social-icon" />
                                         </a>
                                     </li>
@@ -406,20 +423,20 @@ const Profile = () => {
                                                     <div className="profile-row mb-3">
                                                         <div className="profile-col-lg-6">
                                                             <label htmlFor="facebook" className="profile-form-label">Facebook</label>
-                                                            <input type="text" className="profile-form-control" id="facebook" value={""} /*onChange={(e) => setTempFirstName(e.target.value)}*/ />
+                                                            <input type="text" className="profile-form-control" id="facebook" value={""} onChange={(e) => setTempFacebook(e.target.value)} />
                                                         </div>
                                                         <div className="profile-col-lg-6">
                                                             <label htmlFor="twitter" className="profile-form-label">Twitter</label>
-                                                            <input type="text" className="profile-form-control" id="twitter" value={""} />
+                                                            <input type="text" className="profile-form-control" id="twitter" value={""} onChange={(e) => setTempTwitter(e.target.value)}/>
                                                         </div>
                                                     </div><div className="profile-row mb-3">
                                                         <div className="profile-col-lg-6">
                                                             <label htmlFor="whatsapp" className="profile-form-label">WhatsApp</label>
-                                                            <input type="text" className="profile-form-control" id="whatsapp" value={""}  />
+                                                            <input type="text" className="profile-form-control" id="whatsapp" value={""}  onChange={(e) => setTempWhatsApp(e.target.value)}/>
                                                         </div>
                                                         <div className="profile-col-lg-6">
                                                             <label htmlFor="call" className="profile-form-label">Call</label>
-                                                            <input type="text" className="profile-form-control" id="call" value={""}  />
+                                                            <input type="text" className="profile-form-control" id="call" value={""}  onChange={(e) => setTempCall(e.target.value)}/>
                                                         </div>
                                                     </div>
 
