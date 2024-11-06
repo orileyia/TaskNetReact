@@ -421,24 +421,25 @@ const Profile = () => {
                                                     </div>
                                                     <h5 className="profile-fs-17 profile-fw-semibold mb-3">Social Media</h5>
                                                     <div className="profile-row mb-3">
-                                                        <div className="profile-col-lg-6">
-                                                            <label htmlFor="facebook" className="profile-form-label">Facebook</label>
-                                                            <input type="text" className="profile-form-control" id="facebook" value={""} onChange={(e) => setTempFacebook(e.target.value)} />
-                                                        </div>
-                                                        <div className="profile-col-lg-6">
-                                                            <label htmlFor="twitter" className="profile-form-label">Twitter</label>
-                                                            <input type="text" className="profile-form-control" id="twitter" value={""} onChange={(e) => setTempTwitter(e.target.value)}/>
-                                                        </div>
-                                                    </div><div className="profile-row mb-3">
-                                                        <div className="profile-col-lg-6">
-                                                            <label htmlFor="whatsapp" className="profile-form-label">WhatsApp</label>
-                                                            <input type="text" className="profile-form-control" id="whatsapp" value={""}  onChange={(e) => setTempWhatsApp(e.target.value)}/>
-                                                        </div>
-                                                        <div className="profile-col-lg-6">
-                                                            <label htmlFor="call" className="profile-form-label">Call</label>
-                                                            <input type="text" className="profile-form-control" id="call" value={""}  onChange={(e) => setTempCall(e.target.value)}/>
-                                                        </div>
-                                                    </div>
+    <div className="profile-col-lg-6">
+        <label htmlFor="facebook" className="profile-form-label">Facebook</label>
+        <input type="text" className="profile-form-control" id="facebook" value={tempFacebook} onChange={(e) => setTempFacebook(e.target.value)} />
+    </div>
+    <div className="profile-col-lg-6">
+        <label htmlFor="twitter" className="profile-form-label">Twitter</label>
+        <input type="text" className="profile-form-control" id="twitter" value={tempTwitter} onChange={(e) => setTempTwitter(e.target.value)}/>
+    </div>
+</div>
+<div className="profile-row mb-3">
+    <div className="profile-col-lg-6">
+        <label htmlFor="whatsapp" className="profile-form-label">WhatsApp</label>
+        <input type="text" className="profile-form-control" id="whatsapp" value={tempWhatsApp} onChange={(e) => setTempWhatsApp(e.target.value)}/>
+    </div>
+    <div className="profile-col-lg-6">
+        <label htmlFor="call" className="profile-form-label">Call</label>
+        <input type="text" className="profile-form-control" id="call" value={tempCall} onChange={(e) => setTempCall(e.target.value)}/>
+    </div>
+</div>
 
                                                     <div className="profile-card">
                                                         <div className="profile-card-body">
