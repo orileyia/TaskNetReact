@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Menu } from 'lucide-react';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import LoginPage from './components/LoginPage.tsx';
 import SignupPage from './components/SignupPage.tsx';
 import PostJobPage from './components/PostJobPage.tsx';
@@ -20,16 +20,20 @@ interface Task {
 const categories = ["Web Development", "Graphic Design", "Content Writing", "Digital Marketing", "Video Editing"];
 
 export default function TaskNetHomepage() {
-  const [tasks, setTasks] = useState<Task[]>([]); // Specify tasks as an array of Task objects
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-  // Fetch tasks from the backend on component mount
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+
     const fetchTasks = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/jobs');
         const data = await response.json();
-        setTasks(data); // Set tasks fetched from the backend
+        setTasks(data);
       } catch (error) {
         console.error('Error fetching tasks:', error);
       }
@@ -43,6 +47,12 @@ export default function TaskNetHomepage() {
         ? prev.filter((c) => c !== category)
         : [...prev, category]
     );
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    navigate('/');
   };
 
   const filteredTasks = selectedCategories.length > 0
@@ -90,7 +100,7 @@ export default function TaskNetHomepage() {
             <div className="task-footer">
               <div className="client-info">
                 <img
-                  src={`https://i.pravatar.cc/40?img=${task._id}`}
+                  src={`https://i.pravatar.cc/40?img=1`}
                   alt="Client avatar"
                   className="client-avatar"
                 />
@@ -117,12 +127,18 @@ export default function TaskNetHomepage() {
           <Link to="/profile">Profile</Link>
         </nav>
         <div className="auth-buttons">
-          <Link to="/login">
-            <button>Log In</button>
-          </Link>
-          <Link to="/signup">
-            <button className="signup-button">Sign Up</button>
-          </Link>
+          {isLoggedIn ? (
+            <button onClick={handleLogout} className="logout-button">Log Out</button>
+          ) : (
+            <>
+              <Link to="/login">
+                <button>Log In</button>
+              </Link>
+              <Link to="/signup">
+                <button className="signup-button">Sign Up</button>
+              </Link>
+            </>
+          )}
         </div>
         <button className="menu-button">
           <Menu size={24} />
@@ -131,8 +147,8 @@ export default function TaskNetHomepage() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/signup" element={<SignupPage setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/post-job" element={<PostJobPage />} />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
         <Route path="/profile" element={<Profile />} />

@@ -2,32 +2,28 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api';
 import '../css/LoginPage.css';
-
-const LoginPage: React.FC = () => {
+interface LoginPageProps {
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
+}
+const LoginPage: React.FC<LoginPageProps> = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
+  
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setIsLoading(true);
-
     try {
       const response = await login(email, password);
-      console.log(response);
-      
       localStorage.setItem('token', response.token);
-      navigate('/'); // Redirect to home page after successful login
-    } catch (err) {
-      console.log(err.message);
-      
-      setError('Invalid email or password');
-    } 
+      setIsLoggedIn(true);
+      navigate('/');
+    } catch (err: any) {
+      setError(err.message || 'An error occurred during login');
+    }
   };
-
   return (
     <div className="login-page">
       <div className="login-container">

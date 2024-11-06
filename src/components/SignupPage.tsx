@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signup } from '../api';
 import '../css/SignupPage.css';
-
-const SignupPage: React.FC = () => {
+interface LoginPageProps {
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
+}
+const SignupPage: React.FC<LoginPageProps> = ({ setIsLoggedIn }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,6 +28,7 @@ const SignupPage: React.FC = () => {
     try {
       const response = await signup(name, email, password);
       localStorage.setItem('token', response.token);
+      setIsLoggedIn(true);
       navigate('/');
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || 'An error occurred during signup');
