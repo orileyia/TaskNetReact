@@ -89,4 +89,93 @@ export const getJob = (id) => api.get(`/jobs/${id}`);
 export const updateJob = (id, jobData) => api.put(`/jobs/${id}`, jobData);
 export const deleteJob = (id) => api.delete(`/jobs/${id}`);
 
+export const getProfile = async (): Promise<AxiosResponse> => {
+  try {
+    const response = await api.get('/profile');
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateProfile = async (profileData: Partial<UserData>): Promise<AxiosResponse> => {
+  try {
+    const response = await api.put('/profile', profileData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const changePassword = async (oldPassword: string, newPassword: string): Promise<AxiosResponse> => {
+  try {
+    const response = await api.put('/change-password', { oldPassword, newPassword });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const uploadProfilePicture = async (file: File): Promise<AxiosResponse> => {
+  try {
+    const formData = new FormData();
+    formData.append('profilePicture', file);
+    const response = await api.post('/upload-profile-picture', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Task Management
+export const createTask = async (taskData: TaskData): Promise<AxiosResponse> => {
+  try {
+    const response = await api.post('/tasks', taskData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTasks = async (filters?: { category?: string; status?: string }): Promise<AxiosResponse> => {
+  try {
+    const response = await api.get('/tasks', { params: filters });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTaskById = async (taskId: string): Promise<AxiosResponse> => {
+  try {
+    const response = await api.get(`/tasks/${taskId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
+// Search
+export const searchTasks = async (query: string): Promise<AxiosResponse> => {
+  try {
+    const response = await api.get('/search/tasks', { params: { q: query } });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const searchUsers = async (query: string): Promise<AxiosResponse> => {
+  try {
+    const response = await api.get('/search/users', { params: { q: query } });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default api;
