@@ -17,14 +17,16 @@ const Profile = () => {
     const [firstName, setFirstName] = useState('Iva');
     const [lastName, setLastName] = useState('Traykova');
     const [email, setEmail] = useState('user@gmail.com');
+    const [phone, setPhone] = useState('0000000000');
     const [location, setLocation] = useState('Varna');
     const [introduction, setIntroduction] = useState('Developer with over 5 years\' experience working in both the public and private sectors...');
     const [languages, setLanguages] = useState(['English', 'German', 'French']);
-    const [skills, setSkills] = useState(['Cloud Management', 'Responsive Design', '', '', '']);
+    const [skills, setSkills] = useState(['Cloud Management', 'Responsive Design', 'Network Architecture', 'PHP', 'Bootstrap', 'UI & UX Designer']);
     // Temporary state variables for updates
     const [tempFirstName, setTempFirstName] = useState(firstName);
     const [tempLastName, setTempLastName] = useState(lastName);
     const [tempEmail, setTempEmail] = useState(email);
+    const [tempPhone, setTempPhone] = useState(phone);
     const [tempLocation, setTempLocation] = useState(location);
     const [tempIntroduction, setTempIntroduction] = useState(introduction);
     const [tempLanguages, setTempLanguages] = useState(languages.join(', '));
@@ -75,14 +77,17 @@ const Profile = () => {
         setFirstName(tempFirstName);
         setLastName(tempLastName);
         setEmail(tempEmail);
+        setPhone(tempPhone);
         setLocation(tempLocation);
         setIntroduction(tempIntroduction);
         setLanguages(tempLanguages.split(',').map(lang => lang.trim()));
+        setSkills(tempSkills.split(',').map(skill => skill.trim()));
     
         // Reset the temporary state variables
         setTempFirstName(tempFirstName);
         setTempLastName(tempLastName);
         setTempEmail(tempEmail);
+        setTempPhone(tempPhone);
         setTempLocation(tempLocation);
         setTempIntroduction(tempIntroduction);
         setTempLanguages(tempLanguages);
@@ -228,7 +233,7 @@ const Profile = () => {
                                     <span>Email:</span> <span id="displayEmail">{email}</span>
                                 </p>
                                 <p className="profile-contact-info">
-                                    <span>Phone:</span> 123-456-7890
+                                    <span>Phone:</span> <span id="displayPhone">{phone}</span>
                                 </p>
                                 <p className="profile-contact-info mt-3">
                                     <span>Location:</span> <span id="selectedLocation">{location}</span>
@@ -313,13 +318,10 @@ const Profile = () => {
                                             </div>
                                             <hr className="profile-my-4" />
                                             <h4 className="profile-fs-18 profile-fw-bold mt-4">Skills</h4>
-                                            <div className="profile-candidate-skills-content mt-4">
-                                                <button className="profile-btn profile-btn-sm profile-btn-skill mb-2">Cloud Management</button>
-                                                <button className="profile-btn profile-btn-sm profile-btn-skill mb-2">Responsive Design</button>
-                                                <button className="profile-btn profile-btn-sm profile-btn-skill mb-2">Network Architecture</button>
-                                                <button className="profile-btn profile-btn-sm profile-btn-skill mb-2">PHP</button>
-                                                <button className="profile-btn profile-btn-sm profile-btn-skill mb-2">Bootstrap</button>
-                                                <button className="profile-btn profile-btn-sm profile-btn-skill mb-2">UI & UX Designer</button>
+                                            <div className="profile-candidate-skills-content mt-4" id="skillsButtonsContainer">
+                                            {skills.map((skill, index) => (
+                                                    <button key={index} className="profile-btn profile-btn-sm profile-btn-skill mb-2">{skill}</button>
+                                                ))}
                                             </div>
                                             <h4 className="profile -fs-18 profile-fw-bold mt-4">Spoken languages</h4>
                                             <div className="profile-candidate-languages-content mt-4" id="languageButtonsContainer">
@@ -385,7 +387,10 @@ const Profile = () => {
                                                         
                                                     </div>
                                                     <div className="profile-row mb-3">
-
+                                                        <div className="profile-col-lg-6">
+                                                            <label htmlFor="phone" className="profile-form-label">Phone</label>
+                                                            <input type="text" className="profile-form-control" id="phone" value={tempPhone} onChange={(e) => setTempPhone(e.target.value)} />
+                                                        </div>
                                                     <div className="profile-col-lg-6">
                                                             <label htmlFor="location" className="profile-form-label">Location</label>
                                                             <select className="profile-form-select" id="location" value={tempLocation} onChange={(e) => setTempLocation(e.target.value)}>
@@ -400,21 +405,21 @@ const Profile = () => {
                                                     <h5 className="profile-fs-17 profile-fw-semibold mb-3">Social Media</h5>
                                                     <div className="profile-row mb-3">
                                                         <div className="profile-col-lg-6">
-                                                            <label htmlFor="facebookhtml" className="profile-form-label">Facebook</label>
-                                                            <input type="text" className="profile-form-control" id="facebookhtmlid" value={""} /*onChange={(e) => setTempFirstName(e.target.value)}*/ />
+                                                            <label htmlFor="facebook" className="profile-form-label">Facebook</label>
+                                                            <input type="text" className="profile-form-control" id="facebook" value={""} /*onChange={(e) => setTempFirstName(e.target.value)}*/ />
                                                         </div>
                                                         <div className="profile-col-lg-6">
-                                                            <label htmlFor="twitterhtml" className="profile-form-label">Twitter</label>
-                                                            <input type="text" className="profile-form-control" id="twitterhtmlid" value={""} />
+                                                            <label htmlFor="twitter" className="profile-form-label">Twitter</label>
+                                                            <input type="text" className="profile-form-control" id="twitter" value={""} />
                                                         </div>
                                                     </div><div className="profile-row mb-3">
                                                         <div className="profile-col-lg-6">
-                                                            <label htmlFor="whatsapphtml" className="profile-form-label">WhatsApp</label>
-                                                            <input type="text" className="profile-form-control" id="whatsapphtmlid" value={""}  />
+                                                            <label htmlFor="whatsapp" className="profile-form-label">WhatsApp</label>
+                                                            <input type="text" className="profile-form-control" id="whatsapp" value={""}  />
                                                         </div>
                                                         <div className="profile-col-lg-6">
-                                                            <label htmlFor="callhtml" className="profile-form-label">Call</label>
-                                                            <input type="text" className="profile-form-control" id="callhtmlid" value={""}  />
+                                                            <label htmlFor="call" className="profile-form-label">Call</label>
+                                                            <input type="text" className="profile-form-control" id="call" value={""}  />
                                                         </div>
                                                     </div>
 
