@@ -7,7 +7,14 @@ import whatsappIcon from '../images/whatsapp.jpeg';
 import callIcon from '../images/call.png';
 import defaultProfileImage from '../images/profile.jpg';
 
+import { Link } from 'react-router-dom';
+import BookmarksJobs from './BookmarksJobs';
+
 const Profile = () => {
+    useEffect(() => {
+        showOverview();
+    }, []);
+
     const [activeTab, setActiveTab] = useState('overview');
     const [profileImage, setProfileImage] = useState(defaultProfileImage);
     const [firstName, setFirstName] = useState('Iva');
@@ -16,15 +23,24 @@ const Profile = () => {
     const [location, setLocation] = useState('Varna');
     const [introduction, setIntroduction] = useState('Developer with over 5 years\' experience working in both the public and private sectors...');
     const [languages, setLanguages] = useState(['English', 'German', 'French']);
+    const [tempProfileImage, setTempProfileImage] = useState(null);
+    // Temporary state variables for updates
+    const [tempFirstName, setTempFirstName] = useState(firstName);
+    const [tempLastName, setTempLastName] = useState(lastName);
+    const [tempEmail, setTempEmail] = useState(email);
+    const [tempLocation, setTempLocation] = useState(location);
+    const [tempIntroduction, setTempIntroduction] = useState(introduction);
+    const [tempLanguages, setTempLanguages] = useState(languages.join(', '));
+
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [passwordStrength, setPasswordStrength] = useState({ strength: '', percentage: 0, color: '#dc3545' }); // Добавен color
+    const [passwordStrength, setPasswordStrength] = useState({ strength: '', percentage: 0, color: '#dc3545' });
     const [message, setMessage] = useState('');
     const [messageType, setMessageType] = useState('');
 
     const newPasswordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
-    const currentPasswordRef = useRef(null); // Добавена референция за текущата парола
+    const currentPasswordRef = useRef(null);
 
     useEffect(() => {
         showOverview();
@@ -45,8 +61,8 @@ const Profile = () => {
         reader.onload = (e) => {
             const target = e.target;
             if (target && typeof target.result === 'string') {
-                setProfileImage(target.result);
-                localStorage.setItem('tempProfileImage', target.result);
+                setProfileImage(target.result); // Актуализираме изображението в реално време
+                localStorage.setItem('tempProfileImage', target.result); // Запазваме изображението в локалното хранилище
             }
         };
         
@@ -56,6 +72,28 @@ const Profile = () => {
     };
 
     const updateData = () => {
+        // Update the main state variables with the temporary state variables
+        setFirstName(tempFirstName);
+        setLastName(tempLastName);
+        setEmail(tempEmail);
+        setLocation(tempLocation);
+        setIntroduction(tempIntroduction);
+        setLanguages(tempLanguages.split(',').map(lang => lang.trim()));
+    
+        // Reset the temporary state variables
+        setTempFirstName(tempFirstName);
+        setTempLastName(tempLastName);
+        setTempEmail(tempEmail);
+        setTempLocation(tempLocation);
+        setTempIntroduction(tempIntroduction);
+        setTempLanguages(tempLanguages);
+    
+        const newImageSrc = localStorage.getItem('tempProfileImage');
+    if (newImageSrc) {
+        setProfileImage(newImageSrc); // Актуализираме профилната снимка за окончателно запазване
+        localStorage.removeItem('tempProfileImage'); // Премахваме временното изображение след актуализация
+    }
+
         alert('Profile updated successfully!');
     };
 
@@ -146,6 +184,9 @@ const Profile = () => {
                 <div className="profile-header">
                     <h1 className="profile-text-2xl profile-font-bold profile-text-primary">My Profile</h1>
                     <div className="profile-button-group">
+                    <Link to="/bookmarks-jobs">
+                        <button className="profile-btn profile-btn-primary">View Bookmarked Jobs</button>
+                    </Link>
                         <a href="login.html"><button className="profile-btn profile-btn-ghost">Log In</button></a>
                         <a href="signup.html"><button className="profile-btn profile-btn-primary">Sign Up</button></a>
                     </div>
@@ -205,7 +246,7 @@ const Profile = () => {
                             <hr />
                             <div className="profile-contacts">
                                 <h3 className="profile-section-title">Contacts</h3>
-                                <p className="profile -contact-info mt-3">
+                                <p className="profile-contact-info mt-3">
                                     <span>Email:</span> <span id="displayEmail">{email}</span>
                                 </p>
                                 <p className="profile-contact-info">
@@ -238,7 +279,7 @@ const Profile = () => {
                                                 </p>
                                             </div>
                                             <div className="profile-candidate-education-details mt-4">
-                                                <h4 className="profile-fs-18 profile-fw-bold mb-0">Education</h4>
+                                                <h4 className="profile-fs-18 profile-fw-bold mb-0 ">Education</h4>
                                                 <div className="profile-candidate-education-content mt-4 d-flex">
                                                     <div className="profile-circle">B</div>
                                                     <div className="profile-text">
@@ -276,7 +317,7 @@ const Profile = () => {
                                                 <div className="profile-circle">W</div>
                                                 <div className="profile-text">
                                                     <h6 className="profile-fs-16 mb-1">Web Design & Development Team Leader</h6>
-                                                    < p className="mb-2 text-muted">Creative Agency - (2013 - 2016)</p>
+                                                    <p className="mb-2 text-muted">Creative Agency - (2013 - 2016)</p>
                                                     <p className="text-muted">
                                                         There are many variations of passages of available, but the majority alteration in some form. As a highly skilled and successful product development and design specialist with more than 4 Years of My experience.
                                                     </p>
@@ -302,7 +343,7 @@ const Profile = () => {
                                                 <button className="profile-btn profile-btn-sm profile-btn-skill mb-2">Bootstrap</button>
                                                 <button className="profile-btn profile-btn-sm profile-btn-skill mb-2">UI & UX Designer</button>
                                             </div>
-                                            <h4 className="profile-fs-18 profile-fw-bold mt-4">Spoken languages</h4>
+                                            <h4 className="profile -fs-18 profile-fw-bold mt-4">Spoken languages</h4>
                                             <div className="profile-candidate-languages-content mt-4" id="languageButtonsContainer">
                                                 {languages.map((language, index) => (
                                                     <button key={index} className="profile-btn profile-btn-sm profile-btn-language mb-2">{language}</button>
@@ -329,17 +370,17 @@ const Profile = () => {
                                                     <div className="profile-row mb-3">
                                                         <div className="profile-col-lg-6">
                                                             <label htmlFor="firstName" className="profile-form-label">First Name</label>
-                                                            <input type="text" className="profile-form-control" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                                                            <input type="text" className="profile-form-control" id="firstName" value={tempFirstName} onChange={(e) => setTempFirstName(e.target.value)} />
                                                         </div>
                                                         <div className="profile-col-lg-6">
                                                             <label htmlFor="lastName" className="profile-form-label">Last Name</label>
-                                                            <input type="text" className="profile-form-control" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                                                            <input type="text" className="profile-form-control" id="lastName" value={tempLastName} onChange={(e) => setTempLastName(e.target.value)} />
                                                         </div>
                                                     </div>
                                                     <div className="profile-row mb-3">
                                                         <div className="profile-col-lg-6">
                                                             <label htmlFor="email" className="profile-form-label">Email</label>
-                                                            <input type="text" className="profile-form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                                            <input type="text" className="profile-form-control" id="email" value={tempEmail} onChange={(e) => setTempEmail(e.target.value)} />
                                                         </div>
                                                         <div className="profile-col-lg-6">
                                                             <label htmlFor="accountType" className="profile-form-label">Account Type</label>
@@ -353,20 +394,20 @@ const Profile = () => {
                                                     </div>
                                                     <h5 className="profile-fs-17 profile-fw-semibold mb-3">Profile</h5>
                                                     <h5 className="">Introduce Yourself</h5>
-                                                    <textarea className="profile-form-control" id="introduction" rows={5} style={{ maxWidth: '100%' }} value={introduction} onChange={(e) => setIntroduction(e.target.value)}></textarea>
+                                                    <textarea className="profile-form-control" id="introduction" rows={5} style={{ maxWidth: '100%' }} value={tempIntroduction} onChange={(e) => setTempIntroduction(e.target.value)}></textarea>
                                                     <div className="profile-row mb-3">
                                                         <div className="profile-col-lg-6">
                                                             <label htmlFor="languages" className="profile-form-label">Languages</label>
-                                                            <input type="text" className="profile-form-control" id="languages" value={languages.join(', ')} onChange={(e) => setLanguages(e.target.value.split(',').map(lang => lang.trim()))} />
+                                                            <input type="text" className="profile-form-control" id="languages" value={tempLanguages} onChange={(e) => setTempLanguages(e.target.value)} />
                                                         </div>
                                                         <div className="profile-col-lg-6">
                                                             <label htmlFor="location" className="profile-form-label">Location</label>
-                                                            <select className="profile-form-select" id="location" value={location} onChange={(e) => setLocation(e.target.value)}>
-                                                                <option value="SOF">Sofia</option>
-                                                                <option value="PLD">Plovdiv</option>
-                                                                <option value="VAR">Varna</option>
-                                                                <option value="BUR">Burgas</option>
-                                                                <option value="RUS">Ruse</option>
+                                                            <select className="profile-form-select" id="location" value={tempLocation} onChange={(e) => setTempLocation(e.target.value)}>
+                                                                <option value="Sofia">Sofia</option>
+                                                                <option value="Plovdiv">Plovdiv</option>
+                                                                <option value="Varna">Varna</option>
+                                                                <option value="Burgas">Burgas</option>
+                                                                <option value="Ruse">Ruse</option>
                                                             </select>
                                                         </div>
                                                     </div>
