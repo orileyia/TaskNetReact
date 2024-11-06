@@ -20,7 +20,7 @@ const Profile = () => {
     const [location, setLocation] = useState('Varna');
     const [introduction, setIntroduction] = useState('Developer with over 5 years\' experience working in both the public and private sectors...');
     const [languages, setLanguages] = useState(['English', 'German', 'French']);
-    
+    const [skills, setSkills] = useState(['Cloud Management', 'Responsive Design', '', '', '']);
     // Temporary state variables for updates
     const [tempFirstName, setTempFirstName] = useState(firstName);
     const [tempLastName, setTempLastName] = useState(lastName);
@@ -28,6 +28,8 @@ const Profile = () => {
     const [tempLocation, setTempLocation] = useState(location);
     const [tempIntroduction, setTempIntroduction] = useState(introduction);
     const [tempLanguages, setTempLanguages] = useState(languages.join(', '));
+    const [tempSkills, setTempSkills] = useState(skills.join(', '));
+
 
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -84,6 +86,8 @@ const Profile = () => {
         setTempLocation(tempLocation);
         setTempIntroduction(tempIntroduction);
         setTempLanguages(tempLanguages);
+        setTempSkills(tempSkills);
+        
     
         const newImageSrc = localStorage.getItem('tempProfileImage');
         if (newImageSrc) {
@@ -216,18 +220,6 @@ const Profile = () => {
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
-                            <hr />
-                            <h3 className="profile-section-title">Documents</h3>
-                            <div className="profile-document">
-                                <i className="profile-document-icon fa fa-file"></i>
-                                <span className="profile-document-title">Resume.pdf</span>
-                                <i className="profile-download-icon fa fa-download"></i>
-                            </div>
-                            <div className="profile-document">
-                                <i className="profile-document-icon fa fa-file"></i>
-                                <span className="profile-document-title">Cover-letter.pdf</span>
-                                <i className="profile-download-icon fa fa-download"></i>
                             </div>
                             <hr />
                             <div className="profile-contacts">
@@ -387,6 +379,14 @@ const Profile = () => {
                                                             <input type="text" className="profile-form-control" id="languages" value={tempLanguages} onChange={(e) => setTempLanguages(e.target.value)} />
                                                         </div>
                                                         <div className="profile-col-lg-6">
+                                                            <label htmlFor="skills" className="profile-form-label">Skills</label>
+                                                            <input type="text" className="profile-form-control" id="skills" value={tempSkills} onChange={(e) => setTempSkills(e.target.value)} />
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div className="profile-row mb-3">
+
+                                                    <div className="profile-col-lg-6">
                                                             <label htmlFor="location" className="profile-form-label">Location</label>
                                                             <select className="profile-form-select" id="location" value={tempLocation} onChange={(e) => setTempLocation(e.target.value)}>
                                                                 <option value="Sofia">Sofia</option>
@@ -400,21 +400,21 @@ const Profile = () => {
                                                     <h5 className="profile-fs-17 profile-fw-semibold mb-3">Social Media</h5>
                                                     <div className="profile-row mb-3">
                                                         <div className="profile-col-lg-6">
-                                                            <label htmlFor="firstName" className="profile-form-label">First Name</label>
-                                                            <input type="text" className="profile-form-control" id="firstName" value={tempFirstName} onChange={(e) => setTempFirstName(e.target.value)} />
+                                                            <label htmlFor="facebookhtml" className="profile-form-label">Facebook</label>
+                                                            <input type="text" className="profile-form-control" id="facebookhtmlid" value={""} /*onChange={(e) => setTempFirstName(e.target.value)}*/ />
                                                         </div>
                                                         <div className="profile-col-lg-6">
-                                                            <label htmlFor="lastName" className="profile-form-label">Last Name</label>
-                                                            <input type="text" className="profile-form-control" id="lastName" value={tempLastName} onChange={(e) => setTempLastName(e.target.value)} />
+                                                            <label htmlFor="twitterhtml" className="profile-form-label">Twitter</label>
+                                                            <input type="text" className="profile-form-control" id="twitterhtmlid" value={""} />
                                                         </div>
                                                     </div><div className="profile-row mb-3">
                                                         <div className="profile-col-lg-6">
-                                                            <label htmlFor="firstName" className="profile-form-label">First Name</label>
-                                                            <input type="text" className="profile-form-control" id="firstName" value={tempFirstName} onChange={(e) => setTempFirstName(e.target.value)} />
+                                                            <label htmlFor="whatsapphtml" className="profile-form-label">WhatsApp</label>
+                                                            <input type="text" className="profile-form-control" id="whatsapphtmlid" value={""}  />
                                                         </div>
                                                         <div className="profile-col-lg-6">
-                                                            <label htmlFor="lastName" className="profile-form-label">Last Name</label>
-                                                            <input type="text" className="profile-form-control" id="lastName" value={tempLastName} onChange={(e) => setTempLastName(e.target.value)} />
+                                                            <label htmlFor="callhtml" className="profile-form-label">Call</label>
+                                                            <input type="text" className="profile-form-control" id="callhtmlid" value={""}  />
                                                         </div>
                                                     </div>
 
