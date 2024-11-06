@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Menu } from 'lucide-react';
-import { Link, Routes, Route, useNavigate } from 'react-router-dom';
+import { Link, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import LoginPage from './components/LoginPage.tsx';
 import SignupPage from './components/SignupPage.tsx';
 import PostJobPage from './components/PostJobPage.tsx';
@@ -8,7 +8,6 @@ import HowItWorksPage from './components/HowItWorksPage.tsx';
 import Profile from './components/Profile.tsx';
 import './css/App.css';
 
-// Define the structure of a Task
 interface Task {
   _id: string;
   title: string;
@@ -114,6 +113,13 @@ export default function TaskNetHomepage() {
     </main>
   );
 
+  const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+    if (!isLoggedIn) {
+      return <Navigate to="/login" replace />;
+    }
+    return <>{children}</>;
+  };
+
   return (
     <div className="container">
       <header>
@@ -149,10 +155,22 @@ export default function TaskNetHomepage() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/signup" element={<SignupPage setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/post-job" element={<PostJobPage />} />
+        <Route path="/post-job" element={
+          <ProtectedRoute>
+            <PostJobPage />
+          </ProtectedRoute>
+        } />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        } />
+        <Route path="/profile/:id" element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        } />
       </Routes>
     </div>
   );
