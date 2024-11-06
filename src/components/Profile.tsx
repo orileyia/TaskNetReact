@@ -147,7 +147,7 @@ export default function Profile() {
 
   if (!profile) return <div>Loading...</div>;
 
-  return (
+    n (
     <div className="profile-min-h-screen profile-bg-background profile-flex">
       <div className="profile-flex-1">
         <div className="profile-main-content">
