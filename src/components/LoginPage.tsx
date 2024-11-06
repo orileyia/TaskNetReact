@@ -17,9 +17,13 @@ const LoginPage: React.FC = () => {
 
     try {
       const response = await login(email, password);
-      localStorage.setItem('token', response.data.token);
+      console.log(response);
+      
+      localStorage.setItem('token', response.token);
       navigate('/'); // Redirect to home page after successful login
     } catch (err) {
+      console.log(err.message);
+      
       setError('Invalid email or password');
     } 
   };
