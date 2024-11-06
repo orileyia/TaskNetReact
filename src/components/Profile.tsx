@@ -7,9 +7,6 @@ import whatsappIcon from '../images/whatsapp.jpeg';
 import callIcon from '../images/call.png';
 import defaultProfileImage from '../images/profile.jpg';
 
-import { Link } from 'react-router-dom';
-import BookmarksJobs from './BookmarksJobs';
-
 const Profile = () => {
     useEffect(() => {
         showOverview();
@@ -23,7 +20,7 @@ const Profile = () => {
     const [location, setLocation] = useState('Varna');
     const [introduction, setIntroduction] = useState('Developer with over 5 years\' experience working in both the public and private sectors...');
     const [languages, setLanguages] = useState(['English', 'German', 'French']);
-    const [tempProfileImage, setTempProfileImage] = useState(null);
+    
     // Temporary state variables for updates
     const [tempFirstName, setTempFirstName] = useState(firstName);
     const [tempLastName, setTempLastName] = useState(lastName);
@@ -89,10 +86,10 @@ const Profile = () => {
         setTempLanguages(tempLanguages);
     
         const newImageSrc = localStorage.getItem('tempProfileImage');
-    if (newImageSrc) {
-        setProfileImage(newImageSrc); // Актуализираме профилната снимка за окончателно запазване
-        localStorage.removeItem('tempProfileImage'); // Премахваме временното изображение след актуализация
-    }
+        if (newImageSrc) {
+            setProfileImage(newImageSrc); // Актуализираме профилната снимка
+            localStorage.removeItem('tempProfileImage'); // Премахваме временното изображение след актуализация
+        }
 
         alert('Profile updated successfully!');
     };
@@ -181,17 +178,6 @@ const Profile = () => {
     return (
         <div className="profile-min-h-screen profile-bg-background profile-flex">
             <div className="profile-flex-1">
-                <div className="profile-header">
-                    <h1 className="profile-text-2xl profile-font-bold profile-text-primary">My Profile</h1>
-                    <div className="profile-button-group">
-                    <Link to="/bookmarks-jobs">
-                        <button className="profile-btn profile-btn-primary">View Bookmarked Jobs</button>
-                    </Link>
-                        <a href="login.html"><button className="profile-btn profile-btn-ghost">Log In</button></a>
-                        <a href="signup.html"><button className="profile-btn profile-btn-primary">Sign Up</button></a>
-                    </div>
-                </div>
-
                 <div className="profile-main-content">
                     <div className="profile-left-form" style={{ marginTop: 20 }}>
                         <div className="profile-section">
@@ -411,6 +397,27 @@ const Profile = () => {
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <h5 className="profile-fs-17 profile-fw-semibold mb-3">Social Media</h5>
+                                                    <div className="profile-row mb-3">
+                                                        <div className="profile-col-lg-6">
+                                                            <label htmlFor="firstName" className="profile-form-label">First Name</label>
+                                                            <input type="text" className="profile-form-control" id="firstName" value={tempFirstName} onChange={(e) => setTempFirstName(e.target.value)} />
+                                                        </div>
+                                                        <div className="profile-col-lg-6">
+                                                            <label htmlFor="lastName" className="profile-form-label">Last Name</label>
+                                                            <input type="text" className="profile-form-control" id="lastName" value={tempLastName} onChange={(e) => setTempLastName(e.target.value)} />
+                                                        </div>
+                                                    </div><div className="profile-row mb-3">
+                                                        <div className="profile-col-lg-6">
+                                                            <label htmlFor="firstName" className="profile-form-label">First Name</label>
+                                                            <input type="text" className="profile-form-control" id="firstName" value={tempFirstName} onChange={(e) => setTempFirstName(e.target.value)} />
+                                                        </div>
+                                                        <div className="profile-col-lg-6">
+                                                            <label htmlFor="lastName" className="profile-form-label">Last Name</label>
+                                                            <input type="text" className="profile-form-control" id="lastName" value={tempLastName} onChange={(e) => setTempLastName(e.target.value)} />
+                                                        </div>
+                                                    </div>
+
                                                     <div className="profile-card">
                                                         <div className="profile-card-body">
                                                             <h5 className="profile-fs-17 profile-fw-semibold mb-3">Change Password</h5>
