@@ -106,7 +106,7 @@ export default function TaskNetHomepage() {
                 />
                 <span>Client Name</span>
               </div>
-              <button className="bid-button">Bid Now</button>
+              <Link to="/profile/:id" className="bid-button">See profile</Link>
             </div>
           </div>
         ))}
@@ -152,6 +152,7 @@ export default function TaskNetHomepage() {
         <Route path="/post-job" element={<PostJobPage />} />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:id" element={<Profile />} />
       </Routes>
     </div>
   );
