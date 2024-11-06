@@ -20,7 +20,7 @@ const PostJobPage: React.FC = () => {
 
     try {
       await createJob({ title, description, category, budget: Number(budget), deadline });
-      navigate('/'); 
+      navigate('/');
     } catch (err: any) {
       if (err.response && err.response.status === 401) {
         setError('Your session has expired. Please log in again.');
@@ -104,4 +104,4 @@ const PostJobPage: React.FC = () => {
   );
 };
 
-export default PostJobPage;
+export default PostJobPage; 

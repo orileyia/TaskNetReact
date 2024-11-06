@@ -67,7 +67,7 @@ const Profile = () => {
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         const reader = new FileReader();
-        
+
         reader.onload = (e) => {
             const target = e.target;
             if (target && typeof target.result === 'string') {
@@ -75,7 +75,7 @@ const Profile = () => {
                 localStorage.setItem('tempProfileImage', target.result); // Запазваме изображението в локалното хранилище
             }
         };
-        
+
         if (file) {
             reader.readAsDataURL(file);
         }
@@ -95,7 +95,7 @@ const Profile = () => {
         setIntroduction(tempIntroduction);
         setLanguages(tempLanguages.split(',').map(lang => lang.trim()));
         setSkills(tempSkills.split(',').map(skill => skill.trim()));
-    
+
         // Reset the temporary state variables
         setTempFirstName(tempFirstName);
         setTempLastName(tempLastName);
@@ -109,8 +109,8 @@ const Profile = () => {
         setTempIntroduction(tempIntroduction);
         setTempLanguages(tempLanguages);
         setTempSkills(tempSkills);
-        
-    
+
+
         const newImageSrc = localStorage.getItem('tempProfileImage');
         if (newImageSrc) {
             setProfileImage(newImageSrc); // Актуализираме профилната снимка
@@ -192,12 +192,12 @@ const Profile = () => {
 
     const handleUpdate = () => {
         const newImageSrc = localStorage.getItem('tempProfileImage');
-        
+
         if (newImageSrc) {
             setProfileImage(newImageSrc);
             localStorage.removeItem('tempProfileImage');
         }
-        
+
         alert('Profile updated successfully!');
     };
 
@@ -401,7 +401,7 @@ const Profile = () => {
                                                             <label htmlFor="skills" className="profile-form-label">Skills</label>
                                                             <input type="text" className="profile-form-control" id="skills" value={tempSkills} onChange={(e) => setTempSkills(e.target.value)} />
                                                         </div>
-                                                        
+
                                                     </div>
                                                     <div className="profile-row mb-3">
                                                         <div className="profile-col-lg-6">
